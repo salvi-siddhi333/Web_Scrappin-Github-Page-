@@ -1,5 +1,6 @@
 # import libraries
 import requests
+import pandas as pd
 from bs4 import BeautifulSoup as bs
 import numpy as np
 
@@ -67,10 +68,24 @@ for i in range(len(blk_details)):
     else:
         fork.append(np.nan)
 
-print("Details of Trending Repositories")
-for i in range(len(author)):
-    print(author[i], "==>", repo[i])
-    print("Language ==>", lang[i])
-    print("Star ==>", star[i])
-    print("Fork ==>", fork[i])
-    print("_"*50)
+trending_dict = {
+    "Author": author,
+    "Repo" : repo, 
+    "Language" : lang,
+    "Star" : star,
+    "Fork" : fork
+}
+
+#Created Data frame 
+trending_dict = pd.DataFrame(trending_dict)
+#Converted to csv
+trending_dict.to_csv("Trending repositories on GitHub.csv")
+print(trending_dict.head())
+
+# print("Details of Trending Repositories")
+# for i in range(len(author)):
+#     print(author[i], "==>", repo[i])
+#     print("Language ==>", lang[i])
+#     print("Star ==>", star[i])
+#     print("Fork ==>", fork[i])
+#     print("_"*50)
